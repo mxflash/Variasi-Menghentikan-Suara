@@ -1,0 +1,52 @@
+//membuat variable bernama kurang dengan nilai false
+kurang = false;
+//membuat variable bernama vol dengan nilai 0
+vol = 100;
+//membuat fungsi bernama mainkanMusik
+function mainkanMusik() {
+  //menghentikan suara yang dimainkan agar suara yang dimainkan tidak double
+	musik.stop();
+	//mengubah nilai variable vol menjadi 0
+	vol = 100;
+	//mengubah nilai variable kurang menjadi false
+	kurang = false;
+	//membuat volume musik yang dimainkan menjadi maksimal
+	musik.setVolume(100);
+	//membuat variable musik sebagai sound object
+	musik = new Sound();
+	//masukkan suara berlinkage bgm dari panel library ke dalam variable musik
+	musik.attachSound("bgm");
+	//mainkan suara di dalam variable musik sebanyak 999 kali
+	musik.start(0,999);
+}
+//perintah yang dijalankan ketika frame dimainkan
+onEnterFrame = function () {
+	//jika variable kurang bernilai true
+	if (kurang) {
+		//nilai variable vol dikurangi 3
+		vol -= 3;
+		//atur volume suara yang dimainkan sesuai nilai variable vol
+		musik.setVolume(vol);
+		//jika variable vol bernilai kurang dari atau sama dengan 0
+		if (vol<=0) {
+			//hentikan suara yang dimainkan 
+			musik.stop();
+			//ubah nilai variable kurang menjadi false
+			kurang = false;
+			//ubah nilai variable vol menjadi 100
+			vol = 100;
+		}
+	}
+};
+//jika tombol play_btn ditekan
+play_btn.onPress = function() {
+	//jalankan function mainkanMusik()
+	mainkanMusik();
+};
+//jika tombol stop_btn ditekan
+stop_btn.onPress = function() {
+	//ubah nilai variable kurang menjadi true
+	kurang = true;
+};
+//menjalankan fungsi mainkanMusik ketika swf pertama kali dijalankan
+mainkanMusik();
